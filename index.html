@@ -6,6 +6,200 @@
     <title>Document</title>
 </head>
 <body>
-    <script></script>
+    <!-- <scrip src="./proses.js"></scrip> -->
+    <!-- <form>
+        <label>Masukkan nama Customer :</label><br>
+        <input type="text" id="customer" name="customer"><br>
+        <label >Masukkan Account Number:</label><br>
+        <input type="text" id="account" name="account"><br>
+        <!-- <label >Masukkan Saldo:</label><br>
+        <input type="text" id="saldo" name="saldo"><br><br> -->
+    <!-- </form>
+    <button type="button" onclick ="addCustomer()">Submit</button> --
+    <div id="demo"></div> -->
+
+    <script>
+        let customers = []; // This array will hold customer objects
+
+function addCustomer(name, accountNumber) {
+  let newCustomer = {
+    name: name,
+    accountNumber: accountNumber,
+    balance: 0,
+    transactionHistory: []
+  };
+  customers.push(newCustomer);
+}
+
+function findCustomerByAccountNumber(accountNumber) {
+  return customers.find(customer => customer.accountNumber === accountNumber);
+}
+
+function deposit(accountNumber, amount) {
+  let customer = findCustomerByAccountNumber(accountNumber);
+  if (customer) {
+    customer.balance += amount;
+    customer.transactionHistory.push({ date: Date.now(), type: 'deposit', amount: amount });
+    console.log(`Deposit of ${amount} to account number ${accountNumber} was successful.`);
+  } else {
+    console.log(`Customer with account number ${accountNumber} not found.`);
+  }
+}
+
+function withdraw(accountNumber, amount) {
+  let customer = findCustomerByAccountNumber(accountNumber);
+  if (customer) {
+    if (customer.balance >= amount) {
+      customer.balance -= amount;
+      customer.transactionHistory.push({ type: 'withdrawal', amount: amount });
+      console.log(`Withdrawal of ${amount} from account number ${accountNumber} was successful.`);
+    } else {
+      console.log(`Insufficient balance for withdrawal from account number ${accountNumber}.`);
+    }
+  } else {
+    console.log(`Customer with account number ${accountNumber} not found.`);
+  }
+}
+
+console.log("oke")
+addCustomer('John Doe', '123456789');
+deposit('12345678', 1000);
+withdraw('123456789', 500);
+
+function validateCustomerData(name, accountNumber) {
+  if (customers.some(customer => customer.accountNumber === accountNumber)) {
+    return false; // Account number is not unique
+  }
+  // Add more validation as needed
+  return true;
+}
+
+function editCustomerInfo(accountNumber, {}) {
+  let customer = findCustomerByAccountNumber(accountNumber);
+  if (customer) {
+    Object.assign(customer, newInfo);
+    return "Customer info updated";
+  } else {
+    return "Customer not found";
+  }
+}
+
+function getHighBalanceCustomers(minimumBalance) {
+  return customers.filter(customer => customer.balance >= minimumBalance);
+}
+
+function calculateTotalBalance() {
+  return customers.reduce((total, customer) => total + customer.balance, 0);
+}
+
+    
+    // function addCustomer(name,accountNumber){
+    //     // const nama = document.getElementById('customer').value;
+    //     // const accountNumb = document.getElementById('account').value;
+    //     let newCustomer = {
+    //         name : nama,
+    //         accountNumber: accountNumb,
+    //         balance : 0,
+    //         transactionHistory : []
+    //     };
+    //     customers.push(newCustomer);
+    //     // console.log(customers);
+
+    //     // document.write("Nama Customer : " + newCustomer.name+ "<br>" )
+    //     // document.write("Account Customer : " + newCustomer.accountNumber)
+
+    //     // document.getElementById("demo").innerHTML = "Nama Customer :  " + nama +"<br>"+
+    //     //                                             "Account Number: " + accountNumb +"<br>"
+       
+    // }
+//     const customers = [];
+// function addCustomer(name, accountNumber) {
+//     let newCustomer = {
+//         name: name,
+//         accountNumber: accountNumber,
+//         balance: 0,
+//         transactionHistory: []
+//     };
+//     customers.push(newCustomer);
+// }
+
+// function deposit(accountNumber, amount) {
+//     const customer = findCustomer(accountNumber);
+//     if (customer) {
+//         customer.balance += amount;
+//         updateTransactionHistory(customer, 'Deposit', amount);
+//         console.log(`Deposit successful. New balance: ${customer.balance}`);
+//     } else {
+//         console.log('Customer not found');
+//     }
+// }
+
+// function withdraw(accountNumber, amount) {
+//     const customer = findCustomer(accountNumber);
+//     if (customer) {
+//         if (amount <= customer.balance) {
+//             customer.balance -= amount;
+//             updateTransactionHistory(customer, 'Withdrawal', amount);
+//             console.log(`Withdrawal successful. New balance: ${customer.balance}`);
+//         } else {
+//             console.log('Insufficient funds');
+//         }
+//     } else {
+//         console.log('Customer not found');
+//     }
+// }
+
+// function checkBalance(accountNumber) {
+//     const customer = findCustomer(accountNumber);
+//     if (customer) {
+//         console.log(`Current balance: ${customer.balance}`);
+//     } else {
+//         console.log('Customer not found');
+//     }
+// }
+
+// function viewTransactionHistory(accountNumber) {
+//     const customer = findCustomer(accountNumber);
+//     if (customer) {
+//         console.log(`Transaction History for ${customer.name}:`);
+//         customer.transactionHistory.forEach(transaction => {
+//             console.log(`${transaction.type}: ${transaction.amount}`);
+//         });
+//     } else {
+//         console.log('Customer not found');
+//     }
+// }
+
+// function findCustomer(accountNumber) {
+//     return customers.find(customer => customer.accountNumber === accountNumber);
+// }
+
+// function updateTransactionHistory(customer, type, amount) {
+//     const transaction = {
+//         type: type,
+//         amount: amount,
+//         timestamp: new Date()
+//     };
+//     customer.transactionHistory.push(transaction);
+// }
+
+// function recurringTransaction(accountNumber, amount, frequency){
+    
+// }
+
+// function validateCustomerData(name,accountNumber){
+//     if(customers.some(customer=>customer.accountNumber===))
+// }
+
+// // Run
+// addCustomer('andi', '1234');
+// deposit('1234', 7000);
+// withdraw('1234', 200);
+// checkBalance('1234');
+// viewTransactionHistory('1234')
+// validateCustomerData('andi', '1234');
+
+
+</script>
 </body>
 </html>
